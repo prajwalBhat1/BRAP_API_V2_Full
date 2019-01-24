@@ -1,8 +1,7 @@
 package com.brap.schedule.service;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import com.brap.schedule.request.CreateJobRequest;
+import com.brap.schedule.request.UploadFileRequest;
 
 /**
  * Interface describes the various jenkins actions
@@ -28,4 +27,12 @@ public interface SchedulerService {
 	 * @return
 	 */
 	String createJob(CreateJobRequest jobRequest);
+
+	/**
+	 * Upload file on the specified path given
+	 * 
+	 * @param fileRequest
+	 * @return
+	 */
+	String uploadFiles(UploadFileRequest fileRequest);
 }

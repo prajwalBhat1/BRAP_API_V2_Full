@@ -7,8 +7,10 @@ import org.springframework.stereotype.Component;
 
 import com.brap.schedule.client.JenkinsRestClient;
 import com.brap.schedule.request.CreateJobRequest;
+import com.brap.schedule.request.UploadFileRequest;
 import com.brap.schedule.service.SchedulerService;
 import com.brap.util.CronGeneratorUtil;
+import com.brap.util.FileUploaderUtil;
 
 @Component
 public class SchedulerServiceImpl implements SchedulerService {
@@ -16,11 +18,15 @@ public class SchedulerServiceImpl implements SchedulerService {
 	private JenkinsRestClient jenkinsClient;
 
 	private SchedulePersistenceServiceImpl schedulePersistImpl;
+	
+	private FileUploaderUtil uploaderUtil;
 
 	@Autowired
-	public SchedulerServiceImpl(JenkinsRestClient client, SchedulePersistenceServiceImpl schedulePersistImpl) {
+	public SchedulerServiceImpl(JenkinsRestClient client, SchedulePersistenceServiceImpl schedulePersistImpl,
+			FileUploaderUtil uploaderUtil) {
 		this.jenkinsClient = client;
 		this.schedulePersistImpl = schedulePersistImpl;
+		this.uploaderUtil = uploaderUtil;
 	}
 
 	@Override
@@ -37,5 +43,11 @@ public class SchedulerServiceImpl implements SchedulerService {
 		jenkinsClient.scheduleJob(jobRequest.getJobName(), cronExpressions);
 		schedulePersistImpl.saveJob(jobRequest.getJobName(), jobRequest.getJobScheduleString());
 		return createdJobName;
+	}
+
+	@Override
+	public String uploadFiles(UploadFileRequest fileRequest) {
+		String status = uploaderUtil.uploadFile(fileRequest);
+		return status;
 	}
 }

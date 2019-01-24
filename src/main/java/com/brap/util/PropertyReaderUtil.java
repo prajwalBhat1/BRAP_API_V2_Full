@@ -21,6 +21,8 @@ public class PropertyReaderUtil {
 	private String jenkinsPort;
 	@Value("${jenkins.url}")
 	private String jenkinsUrl;
+	@Value("${uploadFiles.path}")
+	private String uploadFilePath;
 
 	public String getJenkinsUsername() {
 		return jenkinsUsername;
@@ -40,6 +42,14 @@ public class PropertyReaderUtil {
 
 	public void setJenkinsUrl(String jenkinsUrl) {
 		this.jenkinsUrl = jenkinsUrl;
+	}
+
+	public String getUploadFilePath() {
+		return uploadFilePath;
+	}
+
+	public void setUploadFilePath(String uploadFilePath) {
+		this.uploadFilePath = uploadFilePath;
 	}
 
 }

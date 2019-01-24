@@ -7,6 +7,7 @@ import java.util.Map;
 public enum ErrorCode {
 	JOB_ALREADY_EXISTS("Job already exists on Jenkins with the same name"),
 	CONFIG_XML_INVALID("Invalid format of xml file provided . Not parseable "),
+	UNABLE_TO_UPLOAD_FILES("Unable to upload Files !!"),
 	UNKNOWN("UNKNOWN");
 
 	private static Map<String, ErrorCode> MAPPER = Collections.unmodifiableMap(initializeMapper());

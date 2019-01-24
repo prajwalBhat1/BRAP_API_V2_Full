@@ -16,6 +16,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.brap.common.exception.JobAlreadyExistsException;
+import com.brap.common.exception.UnableToUploadFileException;
 import com.brap.common.exception.UnparseableConfigXmlException;
 import com.brap.common.response.ErrorCode;
 import com.brap.common.response.ErrorCollection;
@@ -43,6 +44,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	public ResponseEntity<ResponseView<Object>> handleUnparseableConfigXmlException(UnparseableConfigXmlException ex) {
 		ResponseView<Object> responseView = buildResponseViewForException(ErrorCode.CONFIG_XML_INVALID,
 				"Please upload a valid configuration XML file!!");
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseView);
+	}
+	
+	@ExceptionHandler(UnableToUploadFileException.class)
+	@ResponseBody
+	public ResponseEntity<ResponseView<Object>> handleUnableToUploadFileException(UnableToUploadFileException ex) {
+		ResponseView<Object> responseView = buildResponseViewForException(ErrorCode.UNABLE_TO_UPLOAD_FILES,
+				"No files were found or upload failed Please try again!!!");
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseView);
 	}
 
