@@ -4,6 +4,8 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -20,7 +22,7 @@ public class FileUploaderUtil {
 
 	@Autowired
 	private PropertyReaderUtil readerUtil;
-	
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(FileUploaderUtil.class);
 
 	public String uploadFile(UploadFileRequest fileRequest) {
@@ -53,4 +55,12 @@ public class FileUploaderUtil {
 		return status.toString();
 	}
 
+	public Map<String, MultipartFile> createMapForFileAndFileNames(MultipartFile[] files, String jobName) {
+		Map<String, MultipartFile> fileMap = new HashMap<>();
+		for (MultipartFile file : files) {
+			StringBuilder fileName = new StringBuilder().append(jobName).append("_").append(file.getOriginalFilename());
+			fileMap.put(fileName.toString(), file);
+		}
+		return fileMap;
+	}
 }

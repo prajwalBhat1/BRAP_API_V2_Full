@@ -4,12 +4,15 @@
 package com.brap.schedule.response;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author prajwbhat
+ * @param <T>
  *
  */
-public class JenkinsSuccessResponse implements Serializable {
+public class JenkinsSuccessResponse<T> implements Serializable {
 
 	/**
 	 * 
@@ -19,6 +22,8 @@ public class JenkinsSuccessResponse implements Serializable {
 	private String message;
 	private Boolean isSuccess;
 	private String jobName;
+	
+	private List<T> responseList = new ArrayList<>();
 
 	/**
 	 * @param message
@@ -53,6 +58,14 @@ public class JenkinsSuccessResponse implements Serializable {
 
 	public void setJobName(String jobName) {
 		this.jobName = jobName;
+	}
+
+	public List<T> getResponseList() {
+		return responseList;
+	}
+
+	public void setResponseList(List<T> responseList) {
+		this.responseList = responseList;
 	}
 
 }

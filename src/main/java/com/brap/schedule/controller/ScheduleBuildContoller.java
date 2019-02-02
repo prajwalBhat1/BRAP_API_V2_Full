@@ -63,4 +63,15 @@ public class ScheduleBuildContoller {
 		responseView.setDataContent(response);
 		return ResponseEntity.status(HttpStatus.CREATED).body(responseView);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/uploadFiles", method = { RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseView<JenkinsSuccessResponse>> fetchUploadFilesDetails(@RequestParam("jobName") String jobName) {
+		JenkinsSuccessResponse response = new JenkinsSuccessResponse("", true,
+				"");
+		response.setResponseList(schedulerService.getUploadedFileDetails(jobName));
+		ResponseView<JenkinsSuccessResponse> responseView = new ResponseView<>();
+		responseView.setDataContent(response);
+		return ResponseEntity.status(HttpStatus.OK).body(responseView);
+	}
 }
