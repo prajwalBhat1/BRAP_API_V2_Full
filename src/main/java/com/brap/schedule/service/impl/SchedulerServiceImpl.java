@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.brap.persistence.entity.BrapFileUploadInfo;
+import com.brap.persistence.entity.BrapSchedulerDetails;
 import com.brap.schedule.client.JenkinsRestClient;
 import com.brap.schedule.request.CreateJobRequest;
 import com.brap.schedule.request.UploadFileRequest;
@@ -58,5 +59,10 @@ public class SchedulerServiceImpl implements SchedulerService {
 	@Override
 	public List<BrapFileUploadInfo> getUploadedFileDetails(String jobName) {
 		return schedulePersistImpl.getFileInfosByJobName(jobName);
+	}
+
+	@Override
+	public List<BrapSchedulerDetails> getAllScheduledJobs() {
+		return schedulePersistImpl.getAllScheduledJobs();
 	}
 }

@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity(name = "brap_scheduler_details")
 @Table(name = "brap_scheduler_details")
 public class BrapSchedulerDetails implements Serializable {
@@ -65,7 +67,8 @@ public class BrapSchedulerDetails implements Serializable {
 	public void setJobCronExpression(String jobCronExpression) {
 		this.jobCronExpression = jobCronExpression;
 	}
-
+    
+	@JsonIgnore
 	public Timestamp getCreatedDate() {
 		return createdDate;
 	}

@@ -3,6 +3,7 @@ package com.brap.schedule.service;
 import java.util.List;
 
 import com.brap.persistence.entity.BrapFileUploadInfo;
+import com.brap.persistence.entity.BrapSchedulerDetails;
 import com.brap.schedule.request.CreateJobRequest;
 import com.brap.schedule.request.UploadFileRequest;
 
@@ -45,4 +46,9 @@ public interface SchedulerService {
 	 * @return
 	 */
 	List<BrapFileUploadInfo> getUploadedFileDetails(String jobName);
+	/**
+	 * 
+	 * @return
+	 */
+	List<BrapSchedulerDetails> getAllScheduledJobs();
 }

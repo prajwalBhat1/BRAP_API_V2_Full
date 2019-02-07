@@ -74,4 +74,14 @@ public class ScheduleBuildContoller {
 		responseView.setDataContent(response);
 		return ResponseEntity.status(HttpStatus.OK).body(responseView);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/allJobs", method = { RequestMethod.GET }, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseView<JenkinsSuccessResponse>> getAllJobs() {
+		JenkinsSuccessResponse response = new JenkinsSuccessResponse("", true, "");
+		response.setResponseList(schedulerService.getAllScheduledJobs());
+		ResponseView<JenkinsSuccessResponse> responseView = new ResponseView<>();
+		responseView.setDataContent(response);
+		return ResponseEntity.status(HttpStatus.OK).body(responseView);
+	}
 }
